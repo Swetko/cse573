@@ -7,22 +7,34 @@
 
   Follow the instructions to set up the project. Running the command at the end of the instructions should take around an hour. You should see the training success curve approach or hit the ceiling at 1.0, while the test success rate will be quite low. You will use these results in the next question.
   
-## 2. Explore the effects of randomization ##
-  - Basically the same as above, but with randomization flag on/off
-  - Answer the following questions:
-    - How does training performance vary?
-    - How does test performance vary?
-    - How does training time vary? 
+## 2. Explore the effects of training settings ##
+Now that everything is set up, you're going to explore how adjusting the training settings affects the model's performance. For each of the comparisons listed below you should answer the following questions:
+  - How does the training success rate change?
+  - How does the test success rate change?
+  - How does the training time change?
+  - Explain why the training adjustment results in the changes (or lack thereof) listed above.
+
+#### Number of training scenes ####
+Vary the number of scenes the model trains over. You can do this by changing the `--scenes` flag between 1 and 3.
+
+#### Random initializations ####
+Vary how the code initializes the scene for each training episode. You can do this by including the `--randomize-objects` flag. As the name implies, this will randomly shuffle object locations in the scene at the beginning of each episode.
 
 ## 3. Explore the model ##
+In this question you'll be familiarizing youself with the code and exploring how model complexity affects performance. 
   - Explain the code (a3c_loss, agent, model)
 
-### 3.1 make sure it works for >1 scene ###
-  - Compare performance (similar to above) with training on 1 scene vs training on 2 or 3 scenes
+#### Linear Model ####
+#### Remove LSTM ####
+
 
 ### 3.2 explore the effect of memory (LSTM) ###
   - Similar to above, except ablating the inclusion of the LSTM (most likely we add a flag, but we could ask them to implement it)
 
+
+## Part 2 coming soon. ##
+
+<!---
 ## 4. Change reward to achieve different (better) results ##
 
 You might want to change more than just the reward function, so it's best if you get familiar with the code.
@@ -46,3 +58,4 @@ Use the experience with memory from from 4.
 Instead of providing explicit targets, assign a score to each object. The new task is to collect the highest scoring set of K objects within some time limit. 
 
   - If we limit it so that once the model decides to pick up an object, it's stuck with it, then the model would have to learn to make decisions about expected value of further exploration compared to selecting what it's seen given the time limit. 
+-->

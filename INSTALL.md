@@ -75,7 +75,7 @@ With everything up to this point, you are able to run the code, but will not be 
   - Assuming you added the firewall rule above, run TurboVNC Viewer and connect to {external ip}:{display number}
 
 #### Running the code ####
-Now that everything is set up, we can run the code. The following command will train an agent on a single scene with all objects in fixed locations.
+Now that everything is set up, you can run the code. The following command will train an agent on a single scene with all objects in fixed locations.
 ```
 vglrun python3 main.py --workers 1 --gpu 0 --arch linux --scenes 1
 ```
