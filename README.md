@@ -1,11 +1,12 @@
 # CSE 573 Thor project #
 
 ## 1. Installation and basic setup ##
-  - Basic setup instructions (starting from creating a cloud instance to setting up thor)
-  
-### Run basic learning example with 1 scene. ###
-  - Run a simple command (ie train on a single scene without randomization) and verify that the output matches the provided output
+  In this project, you will be exploring deep reinforcement learning using AI2's Thor environment. It consists of household scenes in which various objects are scattered around. The project is split up into two parts. In this first part you will be familiarizing yourself with the code and exploring how changing the training setup affects the results. In the second part, which will be released shortly, you will be modifying the code to apply it to new problem settings in the same environment.
 
+  In order to speed things up, you will be using a GPU. We've provided instructions for setting up the project on a Google Cloud Platform server in [INSTALL](INSTALL.md). If you have access to your own GPU, you may use that instead, but the setup instructions we provide may not work.
+
+  Follow the instructions to set up the project. Running the command at the end of the instructions should take around an hour. You should see the training success curve approach or hit the ceiling at 1.0, while the test success rate will be quite low. You will use these results in the next question.
+  
 ## 2. Explore the effects of randomization ##
   - Basically the same as above, but with randomization flag on/off
   - Answer the following questions:
