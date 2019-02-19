@@ -1,7 +1,7 @@
 ## Installation and basic setup ##
 ##### Important Note: #####
 When signing up for a new cloud account, you get a free $300 credit. This should provide plenty of time (500+ hours of uptime) to work on this project. To be safe, you can stop the instance when you are not using it (select the instance on the “VM Instances” page and press Stop) , as you only get charged while it’s running. If you end up using all of the credit, we have a limited amount of additional credits that we can provide.
-       
+
 
 #### Set up a cloud account ####
   - Follow the instructions at https://cloud.google.com/free
@@ -70,14 +70,14 @@ When you are finished running your code, and want to shut down the instance, you
 ```
 
 #### Viewing the environment ####
-With everything up to this point, you are able to run the code, but will not be able to see the agent as it interacts with the environment. While this is not strictly necessary, it may be useful, especially in the second part. In order to view the remote graphics, you can use TurboVNC Viewer. 
+With everything up to this point, you are able to run the code, but will not be able to see the agent as it interacts with the environment. While this is not strictly necessary, it may be useful, especially in the second part. In order to view the remote graphics, you can use TurboVNC Viewer.
   - Download and install TurboVNC Viewer on your local machine
   - Assuming you added the firewall rule above, run TurboVNC Viewer and connect to {external ip}:{display number}
 
 #### Running the code ####
 Now that everything is set up, you can run the code. The following command will train an agent on a single scene with all objects in fixed locations.
 ```
-vglrun python3 main.py --workers 1 --gpu 0 --arch linux --scenes 1
+vglrun python3 main.py --workers 1 --gpu 0 --scenes 1
 ```
 If you are running the VNC Viewer, you should see a window pop up showing frenetic movements around a kitchen as the agent repeatedly explores the scene trying to find a tomato.
 
