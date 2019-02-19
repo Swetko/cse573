@@ -25,6 +25,12 @@ dpkg -i turbovnc.deb
 # Install Thor
 pip3 install ai2thor setproctitle tensorboardX tensorboard
 
+# Grab the executable for Thor
+wget https://courses.cs.washington.edu/courses/cse573/19wi/project/builds.tar.gz
+tar -xzf builds.tar.gz
+mv builds simple-nav/datasets
+rm builds.tar.gz
+
 # Reboot to allow new configurations to take effect
 # reboot
 
