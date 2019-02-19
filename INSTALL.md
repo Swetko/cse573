@@ -23,7 +23,7 @@ When signing up for a new cloud account, you get a free $300 credit. This should
     + Under Management, security, disks, networking, sole tenancy:
       * Under Metadata, add the key "enable-oslogin" with value "TRUE". This will allow you to add your own ssh key and login from an external terminal.
 
-#### Add some Firewall Rules####
+#### Add some Firewall Rules ####
 You'll need to connect to a couple of different ports on the server
   Navigation menu > VPC network > Firewall rules
   - Create Firewall Rule
@@ -38,7 +38,7 @@ You'll need to connect to a couple of different ports on the server
     + Protocols and ports: tcp: 6006
 
 #### Connect to the instance ####
-You can connect through the browser by clicking on "ssh" for your newly created instance on the VM instances page. This should open a terminal in your browser. Once connected, you can add your ssh key and use the listed "External IP" to connect from a terminal.
+You can connect through the browser by clicking on "ssh" for your newly created instance on the VM instances page. This should open a terminal in your browser. Once connected, you can add your ssh key and use the listed "External IP" (referenced below as {external ip}) to connect from a terminal.
 
 The first time you connect, it should ask if you want to install the Nvidia driver, which you do. If you don't see a prompt when you first connect, restart the server (stop/start on the cloud console, or "sudo reboot" in the terminal), wait a minute or so, and reconnect.
 
