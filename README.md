@@ -19,6 +19,8 @@
 
   `main.py` is just for training. To test you should use `main-test.py --load-model PATH`.
 
+## 1.5. DELIVERABLES ##
+Write a short report (~2 pages) about your findings that should also contain succinct answers to the questions posed below. `Something about the posted here`.
 
 ## 2. Explore the effects of training settings ##
 Now that everything is set up, you're going to explore how adjusting the training settings affects the model's performance. For each of the comparisons listed below you should answer the following questions:
