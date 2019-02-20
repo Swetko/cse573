@@ -43,7 +43,7 @@ You can connect through the browser by clicking on "ssh" for your newly created 
 The first time you connect, it should ask if you want to install the Nvidia driver, which you do. If you don't see a prompt when you first connect, restart the server (stop/start on the cloud console, or "sudo reboot" in the terminal), wait a minute or so, and reconnect.
 
 #### Login as root ####
-Most of the things you will run on the server require root access to work properly. The simplest way to do this is to just login as the root user:
+Most of the things you will run on the server require root access to work properly. The simplest way to do this is to just login as the root user each time you connect to the server:
 ```
 sudo -i passwd # Set this to whatever you want
 su
@@ -57,21 +57,21 @@ reboot
 ```
 
 #### Running the VNC Server ####
-All of the above steps only need to be completed one time. The following must be done each time you restart the server. Run the provided script to start the vnc server and then set the DISPLAY. This allows the code to render the Thor environment.
+The code uses [Unity](https://unity3d.com) to render the environment. Because it is a headless server, you need to run a vnc server to allow unity to render. This must be done each time you restart the instance. Run the provided script to start the vnc server and then set the DISPLAY. This allows the code to render the Thor environment properly.
 ```
 ./run_server.sh
 export DISPLAY=:1 # Or whichever display the server is using, but typically :1.
 ```
 
 #### Stopping the VNC Server ####
-When you are finished running your code, and want to shut down the instance, you can stop the server by calling
+When you are finished running your code, and want to shut down the instance, you can stop the vnc server by calling
 ```
 ./stop_server.sh $DISPLAY # or replace $DISPLAY with its value from above.
 ```
 
 #### Viewing the environment ####
-With everything up to this point, you are able to run the code, but will not be able to see the agent as it interacts with the environment. While this is not strictly necessary, it may be useful, especially in the second part. In order to view the remote graphics, you can use TurboVNC Viewer.
-  - Download and install TurboVNC Viewer on your local machine
+With everything up to this point, you are able to run the code, but will not be able to see the agent as it interacts with the environment. While this is not strictly necessary, it may be useful, especially in the second part. In order to view the remote graphics, you can use [TurboVNC](https://www.turbovnc.org) viewer.
+  - Download and install TurboVNC on your local machine. Note that the download contains both the server and viewer.
   - Assuming you added the firewall rule above, run TurboVNC Viewer and connect to {external ip}:{display number}
 
 #### Running the code ####
@@ -82,7 +82,7 @@ vglrun python3 main.py --workers 1 --gpu 0 --scenes 1
 If you are running the VNC Viewer, you should see a window pop up showing frenetic movements around a kitchen as the agent repeatedly explores the scene trying to find a tomato.
 
 #### Viewing the output ####
-The code logs relevant information, including success rates and runtime, while it's running using TensorBoard. You can view these logs by running the following code on the server:
+The code logs relevant information, including success rates and runtime, while it's running using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard). You can view these logs by running the following code on the server:
 ```
 tensorboard --logdir ./runs
 ```
