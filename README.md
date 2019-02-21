@@ -5,7 +5,7 @@ You can do this project either individually or in groups of 2.
 ## 1. Installation and basic setup ##
   In this project, you will be exploring deep reinforcement learning using the [AI2-Thor](https://ai2thor.allenai.org) environment. It consists of household scenes in which various objects are scattered around. In the current problem setting, the main task is to navigate and find an object in a kitchen scene through reinforcement learning. We have currently implemented the reinforcement learning setup using an actor-critic algorithm called [Asynchronous Advantage Actor-Critic (A3C)](https://arxiv.org/pdf/1602.01783.pdf). In this part, the goal is to familiarize yourself with different components of the code and different training settings. In the second part, which will be released shortly, you will be modifying the code to apply it to new problem settings in the same environment.
 
-  In order to speed things up, you will be using a GPU.<sup>[1](#footnote1)</sup> We've provided instructions for setting up the project on a Google Cloud Platform server in [INSTALL](INSTALL.md). If you have access to your own GPU, you may use that instead, but the setup instructions will likely be a bit different depending on the machine you use; You can contact TAs for help with the setup.
+  In order to speed things up, you will be using a GPU.<sup>[1](#footnote1)</sup> We've provided instructions for setting up the project on a Google Cloud Platform server in [INSTALL](INSTALL.md). If you have access to your own GPU, you may use that instead, but the setup instructions will likely be a bit different depending on the machine you use; You can contact TAs for help with the setup. Moreover if you are running on your own machine and don't have an Nvidia you might be able to run THOR. You just need OpenGL drivers. Just specify `--gpu -1` to disable training on GPU.
 
   Follow the instructions to set up the project. Running the command at the end of the instructions should take around an hour. You should see the training success curve approach or hit the ceiling at 1.0, while the test success rate will be quite low. You will use these results in the next question.
 
@@ -22,7 +22,7 @@ You can do this project either individually or in groups of 2.
   `main.py` is just for training. To test you should use `main-test.py --load-model PATH`.
 
 ## DELIVERABLES ##
-Write a short report (~1-2 pages not including graphs) about your findings that should also contain succinct answers to the questions posed below.
+Write a short report (~1 pages not including graphs) about your findings that should also contain succinct answers to the questions posed below. Deadline: March 1st (Friday), 23:59pm.
 
 ## 2. Explore the effects of training settings (20 points) ##
 Now that everything is set up, you're going to explore how adjusting the training settings affects the model's performance. For each of the comparisons listed below you should provide the following:
