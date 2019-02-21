@@ -24,8 +24,9 @@ When signing up for a new cloud account, you get a free $300 credit. This should
       * Under Metadata, add the key "enable-oslogin" with value "TRUE". This will allow you to add your own ssh key and login from an external terminal.
 
 #### Add some Firewall Rules ####
-You'll need to connect to a couple of different ports on the server
-  Navigation menu > VPC network > Firewall rules
+You'll need to connect to a couple of different ports on the server to view the agent running and the output.
+
+Navigation menu > VPC network > Firewall rules
   - Create Firewall Rule
     + Name: turbovnc (or George, this doesn't actually affect anything)
     + Targets: "All instances in the network"
