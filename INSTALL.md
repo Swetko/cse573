@@ -78,7 +78,7 @@ With everything up to this point, you are able to run the code, but will not be 
 #### Running the code ####
 Now that everything is set up, you can run the code. The following command will train an agent on a single scene with all objects in fixed locations.
 ```
-vglrun python3 main.py --workers 1 --gpu 0 --scenes 1
+vglrun python3 main.py --workers 8 --gpu 0 --scenes 1
 ```
 If you are running the VNC Viewer, you should see a window pop up showing frenetic movements around a kitchen as the agent repeatedly explores the scene trying to find a tomato.
 
