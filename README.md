@@ -21,8 +21,8 @@ You can do this project either individually or in groups of 2.
 
   `main.py` is just for training. To test you should use `main-test.py --load-model PATH`.
 
-## 1.5. DELIVERABLES ##
-Write a short report (~2 pages) about your findings that should also contain succinct answers to the questions posed below. `Something about the posted here`.
+## DELIVERABLES ##
+Write a short report (~1-2 pages not including graphs) about your findings that should also contain succinct answers to the questions posed below.
 
 ## 2. Explore the effects of training settings (20 points) ##
 Now that everything is set up, you're going to explore how adjusting the training settings affects the model's performance. For each of the comparisons listed below you should provide the following:
@@ -32,10 +32,14 @@ Now that everything is set up, you're going to explore how adjusting the trainin
   - Explain why the training adjustment results in the changes (or lack thereof) listed above.
 
 ### 2.1 Number of training scenes ###
-Vary the number of scenes the model trains over. You can do this by changing the `--scenes` flag between 1 and 3. Note: Training with 3 scenes will likely take 5+ hours.
+Vary the number of scenes the model trains over. You can do this by changing the `--scenes` flag between 1 and 3. 
+
+**Note:** Training with 3 scenes will likely take 5+ hours.
 
 ### 2.2 Random initializations ###
-Vary how the code initializes the scene for each training episode. You can do this by including the `--randomize-objects` flag. As the name implies, this will randomly shuffle object locations in the scene at the beginning of each episode. Does randomization help with Training/Test success rates. Why? Note: Training with this flag on 1 scene will likely take an additional 1-2 hours.
+Vary how the code initializes the scene for each training episode. You can do this by including the `--randomize-objects` flag. As the name implies, this will randomly shuffle object locations in the scene at the beginning of each episode. Does randomization help with Training/Test success rates. Why? 
+
+**Note:** Training with this flag on 1 scene will likely take an additional 1-2 hours.
 
 ### 2.3 Same testing and training scene ###
 Figure out how to change so that training and testing scenes are the same. Now run training and testing and report the differences with 2.2. Note: testing on the same scene is not exactly the same as running training. Explain what is the difference.
