@@ -60,8 +60,7 @@ reboot
 #### Running the VNC Server ####
 The code uses [Unity](https://unity3d.com) to render the environment. Because it is a headless server, you need to run a vnc server to allow unity to render. This must be done each time you restart the instance. Run the provided script to start the vnc server and then set the DISPLAY. This allows the code to render the Thor environment properly.
 ```
-./run_server.sh
-export DISPLAY=:1 # Or whichever display the server is using, but typically :1.
+. run_server.sh # Note the syntax. This sets DISPLAY in the current process as opposed to starting a new one.
 ```
 
 #### Stopping the VNC Server ####
