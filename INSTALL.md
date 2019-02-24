@@ -51,10 +51,14 @@ su
 ```
 
 #### Setup the project ####
-As root, run the provided setup script. After running this, you will need to reboot the server to allow the configuration changes to take effect. You will have to re-connect, and re-login as root.
+As root, run the provided setup script. After running this, you will need to reboot the server to allow the configuration changes to take effect. You will have to reconnect, and re-login as root.
 ```
 ./setup.sh
 reboot
+```
+After rebooting, reconnecting, and re-logging in as root, you'll have to install tensorflow in order to run tensorboard (to view the output). Note: Don't do this before rebooting, or the VM will delete all of the torch libraries.
+```
+pip3 install tensorflow
 ```
 
 #### Running the VNC Server ####
