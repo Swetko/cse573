@@ -32,12 +32,12 @@ Now that everything is set up, you're going to explore how adjusting the trainin
   - Explain why the training adjustment results in the changes (or lack thereof) listed above.
 
 ### 2.1 Number of training scenes ###
-Vary the number of scenes the model trains over. You can do this by changing the `--scenes` flag between 1 and 3. 
+Vary the number of scenes the model trains over. You can do this by changing the `--scenes` flag between 1 and 3.
 
 **Note:** Training with 3 scenes will likely take 5+ hours.
 
 ### 2.2 Random initializations ###
-Vary how the code initializes the scene for each training episode. You can do this by including the `--randomize-objects` flag. As the name implies, this will randomly shuffle object locations in the scene at the beginning of each episode. Does randomization help with Training/Test success rates. Why? 
+Vary how the code initializes the scene for each training episode. You can do this by including the `--randomize-objects` flag. As the name implies, this will randomly shuffle object locations in the scene at the beginning of each episode. Does randomization help with Training/Test success rates. Why?
 
 **Note:** Training with this flag on 1 scene will likely take an additional 1-2 hours.
 
@@ -48,7 +48,7 @@ Figure out how to change so that training and testing scenes are the same. Now r
 In this question you'll be familiarizing yourself with the code and exploring how model complexity affects performance.
 
 ### 3.1 Explain the code ###
-At a high level, we need to learn a policy which, given some state, outputs a distribution over all possible actions. As this is deep RL, we'll use a deep neural network to turn the observed state into the requisite action distribution. In one or two sentences each, explain the purpose of the following parts of the code. 
+At a high level, we need to learn a policy which, given some state, outputs a distribution over all possible actions. As this is deep RL, we'll use a deep neural network to turn the observed state into the requisite action distribution. In one or two sentences each, explain the purpose of the following parts of the code.
   - What does `a3c_loss` in `train.py` do?
   - Explain `model.py`
   - Explain the training loop in `train.py`
@@ -86,3 +86,12 @@ Instead of providing explicit targets, assign a score to each object. The new ta
 
   - If we limit it so that once the model decides to pick up an object, it's stuck with it, then the model would have to learn to make decisions about expected value of further exploration compared to selecting what it's seen given the time limit.
 -->
+## finding multiple objects ##
+
+You can achieve the task in any way you want. You might want to hardcode the number of objects you are looking for or you can make it variable and propagate the number throughout your code. Below are some suggestions and notes based on the TAs' experience with this problem. We were able to make the agent find 3 objects. As usual try first on the simplest configuration (1 scene and no randomization). We do not care about testing performance in this part, so make sure the agent learns in the training environment. 
+
+In order to make sure the agent consciously finds the objects you might want to add actions to indicate that an object is found (similar to how currently the "Done" action is used). To change the set of actions you have to look in several files. `constants.py` sets the action names. You also have to change the `action-space` parameter in `flag_parser.py`. In `episode.py` in the function `judge` you have to implement the logic of the actions (What is success criteria, when does the agent see reward, etc.). In general those will be different than the current implementation.
+
+The target is currently specified in the initialization phase as `episode.target`. You might want to change that or to make it a vector. An episode is contains the information for one run of our agent. You might want to add memory to our agent (for example to remember what objects it has seen in the past). One place to do that is to augment the `episode` class. Another might be the `agent` class. In either case make sure it is reinitialized at each episode start, otherwise your agent could think it has seen an object when in fact it had seen it many epochs ago.
+
+Another place that might be beneficial to change is to connect the agent's memory to inform its actions. You might want to change the neural network structure and add connection between its memory and actions (quite like a human). Note that it also has implicit memory in the form of LSTM. Make sure you are able to follow the flow of information and deliver the information from the environment to the `Model` in the form of memory. The relevant functions to look into are `ac3lstm`, `forward` and the model constructor in `model.py`, and `state_for_agent` in `episode.py`. **NOTE: make sure you do not cheat by connection the information from the environment directly to the actions**. We want to make a realistic simulation and part of the job of an RL designer is how to ensure realistic environment.
