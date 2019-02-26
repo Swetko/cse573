@@ -124,7 +124,7 @@ def parse_arguments():
     parser.add_argument(
         '--num-train-episodes',
         type=float,
-        default=1000,
+        default=100000,
         help='maximum # of episodes')
     parser.add_argument(
         '--num-test-episodes',

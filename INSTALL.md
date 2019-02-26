@@ -24,8 +24,9 @@ When signing up for a new cloud account, you get a free $300 credit. This should
       * Under Metadata, add the key "enable-oslogin" with value "TRUE". This will allow you to add your own ssh key and login from an external terminal.
 
 #### Add some Firewall Rules ####
-You'll need to connect to a couple of different ports on the server
-  Navigation menu > VPC network > Firewall rules
+You'll need to connect to a couple of different ports on the server to view the agent running and the output.
+
+Navigation menu > VPC network > Firewall rules
   - Create Firewall Rule
     + Name: turbovnc (or George, this doesn't actually affect anything)
     + Targets: "All instances in the network"
@@ -50,17 +51,20 @@ su
 ```
 
 #### Setup the project ####
-As root, run the provided setup script. After running this, you will need to reboot the server to allow the configuration changes to take effect. You will have to re-connect, and re-login as root.
+As root, run the provided setup script. After running this, you will need to reboot the server to allow the configuration changes to take effect. You will have to reconnect, and re-login as root.
 ```
 ./setup.sh
 reboot
+```
+After rebooting, reconnecting, and re-logging in as root, you'll have to install tensorflow in order to run tensorboard (to view the output). Note: Don't do this before rebooting, or the VM will delete all of the torch libraries.
+```
+pip3 install tensorflow
 ```
 
 #### Running the VNC Server ####
 The code uses [Unity](https://unity3d.com) to render the environment. Because it is a headless server, you need to run a vnc server to allow unity to render. This must be done each time you restart the instance. Run the provided script to start the vnc server and then set the DISPLAY. This allows the code to render the Thor environment properly.
 ```
-./run_server.sh
-export DISPLAY=:1 # Or whichever display the server is using, but typically :1.
+. run_server.sh # Note the syntax. This sets DISPLAY in the current process as opposed to starting a new one.
 ```
 
 #### Stopping the VNC Server ####
@@ -77,7 +81,7 @@ With everything up to this point, you are able to run the code, but will not be 
 #### Running the code ####
 Now that everything is set up, you can run the code. The following command will train an agent on a single scene with all objects in fixed locations.
 ```
-vglrun python3 main.py --workers 1 --gpu 0 --scenes 1
+vglrun python3 main.py --workers 8 --gpu 0 --scenes 1
 ```
 If you are running the VNC Viewer, you should see a window pop up showing frenetic movements around a kitchen as the agent repeatedly explores the scene trying to find a tomato.
 
