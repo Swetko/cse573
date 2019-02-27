@@ -86,7 +86,19 @@ Instead of providing explicit targets, assign a score to each object. The new ta
 
   - If we limit it so that once the model decides to pick up an object, it's stuck with it, then the model would have to learn to make decisions about expected value of further exploration compared to selecting what it's seen given the time limit.
 -->
-## finding multiple objects ##
+
+(Just developing on production, please ignore)
+# Part 2 #
+
+Now that you have seen how the agent is able to find a single object, it is time to move on to bigger and better things; finding *two* objects. In the previous part, the agent searched the scene for a tomato. In this part you will be modifying the code so that the agent learns to locate not only the tomato, but a bowl for it as well.
+
+## Deliverables ##
+- Poster outlining your approach to this problem, as well as results you obtained.
+- Demo of your model running. We'll ask to see this at the poster session. You can either run it live, or show a pre-recorded video.
+
+
+## 1. Finding multiple objects ##
+Your first goal is to modify the code so that it is able to successfully locate two objects: the tomato and the bowl. More explicitly, a successful episode is defined as an episode in which each of the target objects is `visible` to the agent at some point during the episode. Note that `visible` is a property of objects in the scene that depends on both the distance from the agent, as well as the agent's field of view. See the `judge` function in `episode.py` for an example of how to access this property.
 
 You can achieve the task in any way you want. You might want to hardcode the number of objects you are looking for or you can make it variable and propagate the number throughout your code. Below are some suggestions and notes based on the TAs' experience with this problem. We were able to make the agent find 3 objects. As usual try first on the simplest configuration (1 scene and no randomization). We do not care about testing performance in this part, so make sure the agent learns in the training environment.
 
@@ -95,3 +107,17 @@ In order to make sure the agent consciously finds the objects you might want to 
 The target is currently specified in the initialization phase as `episode.target`. You might want to change that or to make it a vector. An episode contains the information for one run of our agent. You might want to add memory to our agent (for example to remember what objects it has seen in the past). This is essentially augmenting the state space for the our task. One place to do that is to augment the `episode` class. Another might be the `agent` class. In either case make sure it is reinitialized at each episode start, otherwise your agent could think it has seen an object when in fact it had seen it many epochs ago.
 
 Another place that might be beneficial to change is to connect the newly augmented state to the agent's actions. You might want to change the neural network structure and add connection between the memory part of the state and actions (quite like a human). Note that it also has implicit memory in the form of LSTM. Make sure you are able to follow the flow of information and deliver the information from the environment to the `Model`. The relevant functions to look into are `ac3lstm`, `forward` and the model constructor in `model.py`, and `state_for_agent` in `episode.py`. **NOTE: make sure you do not cheat by connecting the information from the environment directly to the actions**. We want to make a realistic simulation and part of the job of an RL designer is how to ensure realistic environment.
+
+### Debugging ###
+We’ve added a couple of potentially useful tools for debugging. The first is a manually controlled agent. You can run this using the following command.
+```
+vglrun python3 manul_control.py --scenes 1
+```
+the `--scenes` flag adjusts which scene you run on, and can be set in the range [1, 3].
+
+We’ve also added a method in Episode called `slow_replay`. This will replay an episode with a delay between actions allowing you to see what the model does.
+
+## 2. Improvement ##
+Once you have a model that learns to find multiple objects, the next step is to improve it in some way. This can be in terms of the number of steps for the model to converge during training, the average reward earned, or final success rate. Most likely, the simplest way to improve the model will be to tinker with the reward function, possibly adding additional intermediate rewards, or adjusting the values, but you are free to change other aspects of the model as well.
+
+You should show what improvement you made, and be prepared to explain how you achieved it. If you are unable to improve your model from the previous step, then explain what you tried, what you thought it would improve, and why you think it didn’t work.
