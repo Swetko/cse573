@@ -86,7 +86,7 @@ Instead of providing explicit targets, assign a score to each object. The new ta
 
   - If we limit it so that once the model decides to pick up an object, it's stuck with it, then the model would have to learn to make decisions about expected value of further exploration compared to selecting what it's seen given the time limit.
 -->
-
+<!--
 (Just developing on production, please ignore)
 # Part 2 #
 
@@ -121,3 +121,4 @@ We’ve also added a method in Episode called `slow_replay`. This will replay an
 Once you have a model that learns to find multiple objects, the next step is to improve it in some way. This can be in terms of the number of steps for the model to converge during training, the average reward earned, or final success rate. Most likely, the simplest way to improve the model will be to tinker with the reward function, possibly adding additional intermediate rewards, or adjusting the values, but you are free to change other aspects of the model as well.
 
 You should show what improvement you made, and be prepared to explain how you achieved it. If you are unable to improve your model from the previous step, then explain what you tried, what you thought it would improve, and why you think it didn’t work.
+-->
