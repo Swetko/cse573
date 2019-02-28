@@ -81,7 +81,7 @@ class Model(torch.nn.Module):
     def __init__(self, args):
         ...
 	self.augmented_linear = nn.Linear(additional_state_size, augmented_hidden_size)
-	self.augmented_combination = nn.Linear(1024 + additional_hidden_size, 1024)
+	self.augmented_combination = nn.Linear(1024 + augmented_hidden_size, 1024)
 	...
 
     def embedding(self, state):
