@@ -109,7 +109,7 @@ Once you have a model that learns to find multiple objects, the next step is to 
 
 You should show what improvement you made, and be prepared to explain how you achieved it. If you are unable to improve your model from the previous step, then explain what you tried, what you thought it would improve, and why you think it didn’t work.
 
-## Extra Credit: Cooking the Tomato (10 points) ##
+## Extra Credit: Cooking the Tomato (15 points) ##
 After going to all that trouble learning to find both the bowl and tomato, we've now decided that we would prefer a cooked tomato to a raw one. In order to achieve this, we'll be using the microwave. The goal for this problem is to first locate the tomato (which you are likely an expert at by this point), then pick it up, place it in the microwave, and close the microwave.
 
 You will have to add at least 4 additional actions to the model: OpenObject, CloseObject, PickupObject, and PutObject. Each of these is supported by the Thor controller, and you can find the syntax for each [here](https://ai2thor.allenai.org/tutorials/actions). However, the executable you downloaded in Part 1 does not support the PutObject action, so you will have to replace it with an updated version that can be downloaded [here](https://courses.cs.washington.edu/courses/cse573/19wi/project/builds2.tar.gz). Once you've downloaded it, unpack it, and replace the existing `datasets/builds` directory with it.
