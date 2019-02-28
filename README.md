@@ -55,39 +55,8 @@ At a high level, we need to learn a policy which, given some state, outputs a di
   - Explain the `action` function in `agent.py`
 
 ### 3.2 Explore the effect of memory (LSTM) ###
-The model currently employs a recursive Neural Network. Explore `model.py`, `train.py` and `agent.py` and find out how it is implemented. Remove the recurrent connection as well as the LSTM cell and run training and testing on 1 scene with random initializations. Report the findings similar to part 2.
+The model currently employs a recursive Neural Network. Explore `model.py`, `train.py` and `agent.py` and find out how it is implemented. Remove the recurrent connection as well as the LSTM cell and run training and testing on 1 scene with random initializations. Report the findings similar to question 2.
 
-## Part 2 coming soon. ##
-
-<sub><a name="footnote1">1</a>: You may be able to use your own machine as well, running on cpu by specifying `--gpu -1`, but this will likely be slower. To do this, you will need to install Thor and download the executable from the setup script.</sub>
-
-<!---
-## 4. Change reward to achieve different (better) results ##
-
-You might want to change more than just the reward function, so it's best if you get familiar with the code.
-
-### 4.1 Play with the relative rewards for finding simple object ###
-  - Changing parameters in the current reward (step penalty, finishing reward), comparisons like above
-
-### 4.2 Change the reward to find multiple targets ###
-  - Open-ended. Change the reward so the model successfully collects all targets
-  - We need to add a new flag to trigger this. Select a list of targets instead of a single one.
-  - Also should either have students update the state to include history (which objects have been collected), or provide that for them.
-
-## 5. Find and object and move to microwave ##
-
-Use the experience with memory from from 4.
-  - Similar to 4, but requires ordering.
-
-### 5.1 Explore how you add actions ###
-
-## 6. Weighted item collection ##
-Instead of providing explicit targets, assign a score to each object. The new task is to collect the highest scoring set of K objects within some time limit.
-
-  - If we limit it so that once the model decides to pick up an object, it's stuck with it, then the model would have to learn to make decisions about expected value of further exploration compared to selecting what it's seen given the time limit.
--->
-<!--
-(Just developing on production, please ignore)
 # Part 2 #
 
 Now that you have seen how the agent is able to find a single object, it is time to move on to bigger and better things; finding *two* objects. In the previous part, the agent searched the scene for a tomato. In this part you will be modifying the code so that the agent learns to locate not only the tomato, but a bowl for it as well.
@@ -144,4 +113,5 @@ You should show what improvement you made, and be prepared to explain how you ac
 After going to all that trouble learning to find both the bowl and tomato, we've now decided that we would prefer a cooked tomato to a raw one. In order to achieve this, we'll be using the microwave. The goal for this problem is to first locate the tomato (which you are likely an expert at by this point), then pick it up, place it in the microwave, and close the microwave.
 
 You will have to add at least 4 additional actions to the model: OpenObject, CloseObject, PickupObject, and PutObject. Each of these is supported by the Thor controller, and you can find the syntax for each [here](https://ai2thor.allenai.org/tutorials/actions). However, the executable you downloaded in Part 1 does not support the PutObject action, so you will have to replace it with an updated version that can be downloaded [here](https://courses.cs.washington.edu/courses/cse573/19wi/project/builds2.tar.gz). Once you've downloaded it, unpack it, and replace the existing `datasets/builds` directory with it.
--->
+
+<sub><a name="footnote1">1</a>: You may be able to use your own machine as well, running on cpu by specifying `--gpu -1`, but this will likely be slower. To do this, you will need to install Thor and download the executable from the setup script.</sub>

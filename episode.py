@@ -1,6 +1,8 @@
 """ Contains the Episodes for Navigation. """
 import random
 import torch
+import time
+import sys
 from constants import GOAL_SUCCESS_REWARD, STEP_PENALTY, BASIC_ACTIONS
 from environment import Environment
 from utils.net_util import gpuify
@@ -29,6 +31,7 @@ class Episode:
         self.objects = int_objects + rec_objects
 
         self.actions_list = [{'action':a} for a in BASIC_ACTIONS]
+        self.actions_taken = []
 
     @property
     def environment(self):
@@ -38,7 +41,9 @@ class Episode:
         return self.environment.current_frame
 
     def step(self, action_as_int):
-        return self.action_step(self.actions_list[action_as_int])
+        action = self.actions_list[action_as_int]
+        self.actions_taken.append(action)
+        return self.action_step(action)
 
     def action_step(self, action):
         self.environment.step(action)
@@ -46,6 +51,14 @@ class Episode:
 
         return reward, terminal, action_was_successful
 
+    def slow_replay(self, delay=0.2):
+        # Reset the episode
+        self._env.reset(self.cur_scene, change_seed = False)
+        
+        for action in self.actions_taken:
+            self.action_step(action)
+            time.sleep(delay)
+    
     def judge(self, action):
         """ Judge the last event. """
         # immediate reward
@@ -84,5 +97,7 @@ class Episode:
         # For now, single target.
         self.target = 'Tomato'
         self.success = False
+        self.cur_scene = scene
+        self.actions_taken = []
         
         return True
