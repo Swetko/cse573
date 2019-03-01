@@ -51,7 +51,7 @@ def main():
         args.gpu_ids = [-1]
     else:
         torch.cuda.manual_seed(args.seed)
-        mp.set_start_method('spawn')
+        mp.set_start_method('spawn', force=True)
 
     print('=> Creating the shared model and optimizer.')
     shared_model = create_shared_model(args)
