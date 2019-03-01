@@ -64,6 +64,7 @@ Now that you have seen how the agent is able to find a single object, it is time
 ## Deliverables ##
 - Poster outlining your approach to this problem, as well as results you obtained.
 - Demo of your model running. We'll ask to see this at the poster session. You can either run it live, or show a pre-recorded video.
+- A zip file containing any modified files necessary to run your model.
 
 
 ## 1. Finding multiple objects (40 points) ##
