@@ -4,9 +4,7 @@ if [ ! -d tensorboard ]; then
    virtualenv tensorboard
    source tensorboard/bin/activate
    pip3 install tensorboard tensorflow
-
-else
-    source tensorboard/bin/activate
+   deactivate
 fi
 tensorboard/bin/tensorboard "$@"
-deactivate
+

@@ -56,10 +56,6 @@ As root, run the provided setup script. After running this, you will need to reb
 ./setup.sh
 reboot
 ```
-After rebooting, reconnecting, and re-logging in as root, you'll have to install tensorflow in order to run tensorboard (to view the output). Note: Don't do this before rebooting, or the VM will delete all of the torch libraries.
-```
-pip3 install tensorflow
-```
 
 #### Running the VNC Server ####
 The code uses [Unity](https://unity3d.com) to render the environment. Because it is a headless server, you need to run a vnc server to allow unity to render. This must be done each time you restart the instance. Run the provided script to start the vnc server and then set the DISPLAY. This allows the code to render the Thor environment properly.
@@ -88,6 +84,6 @@ If you are running the VNC Viewer, you should see a window pop up showing frenet
 #### Viewing the output ####
 The code logs relevant information, including success rates and runtime, while it's running using [TensorBoard](https://www.tensorflow.org/guide/summaries_and_tensorboard). You can view these logs by running the following code on the server:
 ```
-tensorboard --logdir ./runs
+./run_tensorboard.sh --logdir ./runs
 ```
-Then in a local browser, go to {external ip}:6006 to see the logs.
+Then in a local browser, go to {external ip}:6006 to see the logs. Due to the issue with torch being removed when the server is restarted after installing tensorflow, this script creates a virtualenv, then installs and runs tensorboard from there.
