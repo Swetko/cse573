@@ -76,17 +76,22 @@ class Environment:
         self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=0))
 
 
-    def reset(self, scene_name):
+    def reset(self, scene_name, change_seed=True):
         """ Reset the scene. """
         self.controller.reset(scene_name)
         self.controller.step(dict(action='Initialize', gridSize=self.grid_size, fieldOfView=self.fov))
+        if change_seed:
+            self.randomize_agent_location()
+        else:
+            self.teleport_agent_to(**self.start_state)
+
         self.y = self.controller.last_event.metadata['agent']['position']['y']
         self.controller.step(dict(action='ToggleHideAndSeekObjects'))
-        self.randomize_agent_location()
-        if self.randomize_objects:
-            self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=random.randint(0, 1000000)))
-        else:
-            self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=0))
+        if change_seed:
+            if self.randomize_objects:
+                self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=random.randint(0, 1000000)))
+            else:
+                self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=0))
 
     def all_objects(self): 
         objects = self.controller.last_event.metadata['objects']
