@@ -58,7 +58,7 @@ class Environment:
     def start(self, scene_name, gpu_id):
         """ Begin the scene. """
         # self.controller.start(x_display=str(gpu_id))
-        self.controller.start()
+        #self.controller.start()
         self.controller.step({'action': 'ChangeQuality', 'quality': 'Very Low'})
         self.controller.step(
                 {
@@ -74,7 +74,7 @@ class Environment:
         self.controller.step(dict(action='ToggleHideAndSeekObjects'))
         self.randomize_agent_location()
         self.seed = 0
-        self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=self.seed))
+        self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, numPlacementAttempts=10, randomSeed=self.seed))
 
 
     def reset(self, scene_name, change_seed=True):
@@ -90,9 +90,9 @@ class Environment:
         self.controller.step(dict(action='ToggleHideAndSeekObjects'))
         if change_seed and self.randomize_objects:
             self.seed = random.randint(0, 1000000)
-            self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=self.seed))
+            self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, numPlacementAttempts=10, randomSeed=self.seed))
         else:
-            self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, maxNumRepeats=10, randomSeed=self.seed))
+            self.controller.step(dict(action='InitialRandomSpawn', forceVisible=True, numPlacementAttempts=10, randomSeed=self.seed))
 
     def all_objects(self): 
         objects = self.controller.last_event.metadata['objects']
@@ -109,26 +109,31 @@ class Environment:
             if next_state is None:
                 self.last_event.metadata['lastActionSuccess'] = False
             else:
-                event = self.controller.step(dict(action='Teleport', x=next_state.x, y=next_state.y, z=next_state.z))
+                event = self.controller.step(dict(action='Teleport',
+                                                  x=next_state.x,
+                                                  y=next_state.y,
+                                                  z=next_state.z,
+                                                  rotation=next_state.rotation,
+                                                  horizon=next_state.horizon))
                 s1 = event.metadata['lastActionSuccess']
-                event = self.controller.step(dict(action='Rotate', rotation=next_state.rotation))
-                s2 = event.metadata['lastActionSuccess']
-                event = self.controller.step(dict(action="Look", horizon=next_state.horizon))
-                s3 = event.metadata['lastActionSuccess']
-
-                if not (s1 and s2 and s3):
+                if not s1:
                     # Go back to previous state.
                     self.teleport_agent_to(curr_state.x, curr_state.y, curr_state.z, curr_state.rotation, curr_state.horizon)
                     self.last_event.metadata['lastActionSuccess'] = False
         elif action_dict['action'] != 'Done':
             return self.controller.step(action_dict)
 
+        
     def teleport_agent_to(self, x, y, z, rotation, horizon):
         """ Teleport the agent to (x,y,z) with given rotation and horizon. """
-        self.controller.step(dict(action='Teleport', x=x, y=y, z=z))
-        self.controller.step(dict(action='Rotate', rotation=rotation))
-        self.controller.step(dict(action="Look", horizon=horizon))
+        self.controller.step(dict(action='Teleport',
+                                  x=x,
+                                  y=y,
+                                  z=z,
+                                  rotation=rotation,
+                                  horizon=horizon))
 
+        
     def random_reachable_state(self):
         """ Get a random reachable state. """
         xyz = random.choice(self.reachable_points)
